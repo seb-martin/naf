@@ -1,0 +1,15 @@
+{
+    "name": "naf-api",
+    "version": "0.0.1",
+    "description": "Expose les données de la 'Nomenclature d'activités française' via une API REST",
+    "dependencies": {
+        "body-parser": "^1.5.2",
+        "express": "4.x",
+        "mongodb": "^1.4.7",
+        "morgan": "^1.2.2"
+    },
+    "scripts":{
+        "prestart": "npm install",
+        "start": "node server.js"
+    }
+}

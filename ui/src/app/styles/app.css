@@ -1,0 +1,48 @@
+
+header{
+    margin-top: 60px;
+}
+
+aside{
+    width: 270px;
+}
+
+aside.affix{
+    top: 60px;
+/*
+    right: 0;
+    left: 0;
+*/
+}
+
+.loading-img{
+    background: url("loading.gif") no-repeat;
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    vertical-align: middle;
+}
+
+.nav-tabs a:hover{
+    cursor: pointer;
+}
+
+.article-td.ng-move,
+.article-td.ng-enter {
+    -webkit-transition:all linear 0.2s;
+    -moz-transition:all linear 0.2s;
+    -o-transition:all linear 0.2s;
+    transition:all linear 0.2s;
+}
+
+.article-td.ng-leave.ng-leave-active,
+.article-td.ng-move,
+.article-td.ng-enter {
+    opacity:0;
+}
+
+.article-td.ng-leave,
+.article-td.ng-move.ng-move-active,
+.article-td.ng-enter.ng-enter-active {
+    opacity:1;
+}

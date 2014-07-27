@@ -1,0 +1,30 @@
+{
+  "name": "naf-ui",
+  "version": "0.0.0",
+  "authors": [
+    "seb-martin <seb.martin.94@gmail.com>"
+  ],
+  "main": "server.js",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.21",
+    "jquery": "~2.1.1",
+    "angular-resource": "~1.2.21",
+    "angular-animate": "~1.2.21",
+    "bootstrap": "~3.2.0",
+    "ngInfiniteScroll": "1.0.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.2.21"
+  }
+}

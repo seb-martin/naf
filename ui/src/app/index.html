@@ -1,0 +1,141 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+	<meta charset="utf-8">
+	<title>NAF</title>
+	<link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./styles/app.css">
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" ng-controller="NavbarCtrl">
+
+        <div class="container" >
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand glyphicon glyphicon-tags" href="#">
+                    {{service.version.libelle}}
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <label class="sr-only" for="versionSelect">Version NAF</label>
+                        <select id="versionSelect" class="form-control"
+                                ng-model="service.version" ng-options="v.libelle for (k, v) in service.versions"
+                                tooltip data-toggle="tooltip" data-placement="bottom" title="Version NAF"></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="niveauSelect">Niveau NAF</label>
+                        <select id="niveauSelect" class="form-control"
+                                ng-model="service.niveau" ng-options="n.titre for (k, n) in service.version.endpoints"
+                                tooltip data-toggle="tooltip" data-placement="bottom" title="Niveau NAF"></select>
+                    </div>
+                    <div class="form-group has-feedback"
+                         ng-class="{'has-warning':service.updated && !service.articles.length, 'has-success':service.updated && service.articles.length}">
+                        <label class="sr-only" for="filterInput">Version NAF</label>
+                        <input id="filterInput" ng-model="service.filtre" type="text"
+                               class="form-control"
+                               placeholder="Filtrer les activités de la nomenclature" autofocus
+                               tooltip data-toggle="tooltip" data-placement="bottom" title="Filtre">
+                            <span class="glyphicon form-control-feedback"
+                                  ng-class="{'glyphicon-warning-sign':service.updated && !service.articles.length, 'glyphicon-ok':service.updated && service.articles.length}"></span>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+    </nav>
+
+	<header class="jumbotron container" ng-controller="JumbotronCtrl">
+		<div class="row">
+			<div class="col-md-2">
+				<h1 class="glyphicon glyphicon-tags"></h1>
+			</div>
+			<div class="col-md-8">
+				<h1> Nomenclature d'Activités Française </h1>
+
+                <p style="text-align: right">
+                    Exposition web (pour les utilisateurs) et REST (pour les applications)
+                    de la
+                    <a ng-href="{{service.version.documentation}}"
+                       target="_blank">{{service.version.titre}}</a>.
+				</p>
+			</div>
+
+		</div>
+	</header>
+
+	<section id="pageSection" class="container" ng-controller="PageCtrl" >
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <section id="tabContentSection" >
+                    <h2>{{service.niveau.titre}}</h2>
+
+                    <div ng-hide="!service.updated || service.articles.length" class="" role="alert">
+                        <div class="alert alert-warning">
+                            <h3>
+                                <span class="glyphicon glyphicon-warning-sign"></span>
+                                Aucun article ne correspond à vos critères <span class="label label-warning">:'(</span>
+                            </h3>
+                            <p>Vérifiez vos critères de recherche</p>
+
+                            <dl class="dl-horizontal">
+
+                                <dt>Version</dt>
+                                <dd>{{service.version.titre}}</dd>
+                                <dt>Niveau</dt>
+                                <dd>{{service.niveau.titre}}</dd>
+                                <dt>Filtre</dt>
+                                <dd>{{service.filtre}}</dd>
+                            </dl>
+                        </div>
+                    </div>
+
+                    <table ng-show="service.articles.length" class="table table-striped table-bordered table-condensed">
+                        <thead>
+                        <tr>
+                            <th ng-repeat="c in service.niveau.champs">{{c.titre}}</th>
+                        </tr>
+                        </thead>
+                        <tbody infinite-scroll='service.paging()' infinite-scroll-disabled='!service.updated'>
+                        <tr ng-repeat="a in service.articles" class="article-td">
+                            <td ng-repeat="c in service.niveau.champs">{{a[c.nom]}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div ng-hide="service.updated" style="text-align: center">
+                        <span class="loading-img"></span>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+
+
+
+
+	</section>
+
+
+	<script src="./bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="./bower_components/angular/angular.min.js"></script>
+	<script src="./bower_components/angular-resource/angular-resource.min.js"></script>
+	<script src="./bower_components/angular-animate/angular-animate.min.js"></script>
+	<script src="./bower_components/angular-animate/angular-animate.min.js"></script>
+	<script src="./bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
+	<script src="./scripts/app.js"></script>
+</body>
+</html>

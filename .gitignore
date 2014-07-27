@@ -1,0 +1,4 @@
+.vagrant
+api/src/node_modules
+ui/src/node_modules
+ui/src/app/bower_components
