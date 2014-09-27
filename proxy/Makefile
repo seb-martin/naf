@@ -22,7 +22,13 @@ ifeq ("$(wildcard $(NGINX_CONF))", "")
 	@exit 1
 endif
 
-	docker run --name $(CONTAINER_NAME) -v ${NGINX_CONF}:/etc/nginx.conf --link $(LINKED_NAF2003_API_CONTAINER_NAME):api2003 --link $(LINKED_NAF2008_API_CONTAINER_NAME):api2008 --link $(LINKED_UI_CONTAINER_NAME):ui -p $(HOST_PORT):80 -d $(IMG_TAG)
+	docker run --name $(CONTAINER_NAME) -v ${NGINX_CONF}:/etc/nginx.conf \
+			--link $(LINKED_NAF2003_API_CONTAINER_NAME):api2003 \
+			--link $(LINKED_NAF2008_API_CONTAINER_NAME):api2008 \
+			--link $(LINKED_UI_CONTAINER_NAME):ui \
+			-p $(HOST_PORT):80 \
+			-d \
+			$(IMG_TAG)
 
 stop:
 	@echo "$@ $(CONTAINER_NAME):$(IMG_TAG)"
