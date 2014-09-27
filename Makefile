@@ -22,7 +22,7 @@ NAF2008_META_FILE=`pwd`/api/conf/naf2008-meta.json
 
 # Fichiers de configuration du proxy
 PROXY_NGINX_CONF=`pwd`/proxy/conf/nginx.conf
-
+PROXY_HOST_PORT=80
 
 all:
 	@echo "make build    -- construit toutes les images docker"
@@ -89,7 +89,7 @@ run-ui:
 
 run-proxy:
 	@echo "$@"
-	$(MAKE) -C proxy CONTAINER_NAME=${PROXY_CONTAINER_NAME} NGINX_CONF=${PROXY_NGINX_CONF} run
+	$(MAKE) -C proxy CONTAINER_NAME=${PROXY_CONTAINER_NAME} NGINX_CONF=${PROXY_NGINX_CONF} HOST_PORT=${PROXY_HOST_PORT} run
 
 
 run-populator: run-naf2003-populator run-naf2008-populator
